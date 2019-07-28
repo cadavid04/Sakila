@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Language List</title>
+    </h:head>
+    <f:view>
+
+
+        <h:form>
+            <h1><h:outputText value="Create/Edit"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="LanguageId:" for="languageId" />
+                <p:inputText id="languageId" value="#{languageMbean.details.languageId}" title="LanguageId" required="true" requiredMessage="The LanguageId field is required."/>          
+                <p:outputLabel value="Name:" for="name" />
+                <p:inputText id="name" value="#{languageMbean.details.name}" title="Name" required="true" requiredMessage="The Name field is required."/>
+                <p:outputLabel value="LastUpdate:" for="lastUpdate" />
+                <p:inputText id="lastUpdate" value="#{languageMbean.details.lastUpdate}" title="LastUpdate" required="true" requiredMessage="The LastUpdate field is required.">
+                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                </p:inputText>
+            </p:panelGrid>
+            <h:commandButton id="create" value="Create" action="#{languageMbean.create}"/>
+        </h:form>
+    </f:view>
+
+    
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <h:commandButton id="update" value="List" action="#{languageMbean.list()}"/>
+                <p:dataTable value="#{languageMbean.languages}" var="item">
+                    <p:column headerText="LanguageId"
+                       
+                        sortBy="#{item.languageId}"
+                              filterBy="#{item.languageId}"
+                              filterMatchMode="contains">
+                        <h:commandLink action="#{languageMbean.ShowDetails(item)}" value="#{item.languageId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="LastUpdate"/>
+                        </f:facet>
+                        <h:outputText value="#{item.lastUpdate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+
