@@ -56,6 +56,12 @@ public class LanguageMbean implements Serializable {
         language = languageManager.update(language);
         return "LanguageList";
         }
+    
+    public String delete (){
+        System.out.println("###UPDATE###");
+        this.languageManager.delete(language);
+        return "LanguageList";
+        }
     public String list (){
         System.out.println("###LIST###");
         return "LanguageList";

@@ -40,6 +40,10 @@ public class LanguageManager implements Serializable {
      public Language update(Language language) {
         return em.merge(language);
     }
+     
+     public void delete(Language language) {
+        em.remove(em.merge(language));
+    }
 
    
 }
